@@ -20,7 +20,7 @@ const DayList = (props: DayListProps) => {
     )
 
   return (
-    <View style={styles.daylist_container}>
+    <View style={styles.day_list_container}>
       <FlatList
       data={props.weather_data}
       renderItem={renderItem}
@@ -34,7 +34,7 @@ const DayList = (props: DayListProps) => {
 export default DayList;
 
 const styles = StyleSheet.create({
-  daylist_container: {
+  day_list_container: {
       flex:1,
     //   justifyContent:'space-around',
       alignItems: 'center'

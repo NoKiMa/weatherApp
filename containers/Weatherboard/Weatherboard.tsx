@@ -10,10 +10,10 @@ type WeatherboardProps = {
 const Weatherboard = (props: WeatherboardProps) => {
   return (
     <View style={styles.container_weatherboard}>
-      <View style={styles.namecity_container}>
-        <Text style={styles.namecity}>{props.name}</Text>
+      <View style={styles.name_city_container}>
+        <Text style={styles.name_city}>{props.name}</Text>
       </View>
-      <View style={styles.daylist_container}>
+      <View style={styles.day_list_container}>
         <DayList weather_data={props.daylist} />
       </View>
     </View>
@@ -32,16 +32,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 5,
   },
-  namecity_container: {
+  name_city_container: {
     flex: 1.5,
   },
-  namecity: {
+  name_city: {
     marginTop: 15,
     marginHorizontal: 20,
     fontSize: 28,
     color: 'white',
   },
-  daylist_container: {
+  day_list_container: {
     flex: 3.5,
   },
 });
