@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import type {Node} from 'react';
+// @ts-ignore
+import React, {useState, useEffect, Node, useMemo} from 'react';
 import InputCity from './containers/InputCity/InputCity';
 import Weatherboard from './containers/Weatherboard/Weatherboard';
 import {WeatherItem} from './models/types';
@@ -13,12 +13,15 @@ import {
   Platform,
   Alert,
 } from 'react-native';
+import {isYouNeedUmbrella, takeUmbrella} from "./services/heavyweightService/umbrellaService";
 
 const App: () => Node = () => {
   const [city, setCity] = useState(DEFAULT_CITY);
   const [weatherData, setWeatherData] = useState<WeatherItem[]>([]);
   const [message, setMessage] = useState('');
-  // const [isDay, setIsDay] = useState(true);
+  // const [isRainy, setIsRainy] = useState(false);
+  // const [needUmbrella, setNeedUmbrella] = useState(false);
+
   useEffect(() => {
     restServiceApi.getWeather(city).then(data => {
       if (data.cod !== '200') {
@@ -31,9 +34,18 @@ const App: () => Node = () => {
     });
   }, [city]);
 
+
+
   const showAlert = () => {
     Alert.alert('Warning', `${message}`, [{text: 'Ok'}]);
   };
+
+  // isYouNeedUmbrella(weatherData);
+
+  // useMemo(()=>{
+  //   console.log("take umbrella");
+  //   return setNeedUmbrella(takeUmbrella());
+  // },[isRainy])
 
   return (
     <KeyboardAvoidingView

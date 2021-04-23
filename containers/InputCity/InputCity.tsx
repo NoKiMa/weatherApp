@@ -1,10 +1,11 @@
+// @ts-ignore
 import React, {useState} from 'react';
 import {
   View,
   TextInput,
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 
 type InputCityProps = {
@@ -27,11 +28,11 @@ const InputCity = (props: InputCityProps) => {
         placeholder="add name of the city"
         placeholderTextColor="deepskyblue"
       />
-      <TouchableHighlight onPress={returnNewCity}>
+      <TouchableOpacity onPress={returnNewCity}>
         <View style={styles.input_btn}>
           <Text style={{color: '#ffffff'}}>Go</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   );
 };
