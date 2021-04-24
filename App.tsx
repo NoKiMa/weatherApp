@@ -34,7 +34,7 @@ const App: () => Node = () => {
 
 
   const showAlert = () => {
-    Alert.alert('Warning', `${message}`, [{text: 'Ok'}]);
+    Alert.alert('Warning', `${message}.  Try again`, [{text: 'Ok'}]);
   };
 
   // isYouNeedUmbrella(weatherData);
