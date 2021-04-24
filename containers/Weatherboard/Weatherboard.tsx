@@ -15,6 +15,7 @@ type WeatherboardProps = {
 const Weatherboard = (props: WeatherboardProps) => {
   const [isDay, setIsDay] = useState(false);
 
+ // heavyweight function with useMemo() for change night/day theme;
   let change:boolean = useMemo(()=>heavyweightThemeChange(isDay), [isDay])
 
   return (

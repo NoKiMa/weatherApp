@@ -67,8 +67,3 @@ const getSeparateDays = (forecast: dayList[]) => {
   });
   return arrDayRes;
 };
-
-
-// const getSeparateDays = (forecast: dayList[]) =>{
-//   let arrDays: Array<DayChunk> = Object.keys(forecast)
-// }

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import {WeatherItem} from '../../models/types';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {BASE_OPEN_WEATHER_URL_FOR_ICONS} from '../../config/main.const'
 
 const DayItem = (props: WeatherItem) => {
   return (
@@ -10,7 +11,7 @@ const DayItem = (props: WeatherItem) => {
         <Text style={styles.day_title}>{props.day}</Text>
       </View>
       <Image
-        source={{uri: `https://openweathermap.org/img/wn/${props.icon}@2x.png`}}
+        source={{uri: `${BASE_OPEN_WEATHER_URL_FOR_ICONS}${props.icon}@2x.png`}}
         style={{width: 55, height: 55}}
       />
       <View style={styles.temp_container}>
