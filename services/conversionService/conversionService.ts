@@ -19,7 +19,7 @@ export const creatWeatherData = (data: WeatherModel) => {
     .map(day => {
       const separateDays = getSeparateDays(data.list);
       const dayOfWeek = separateDays.find(
-        separateDay => separateDay.dayOfWeek === getDayNum(day.dt_txt),
+        separateDay => separateDay.dayOfWeek === getDayNum(day.dt),
       );
       const weatherItem: WeatherItem = {
         id: day.dt.toString(),
@@ -45,7 +45,7 @@ const getSeparateDays = (forecast: dayList[]) => {
 
   forecast.forEach(item => {
     arrDays.forEach(day => {
-      if (day.dayOfWeek === getDayNum(item.dt_txt)) {
+      if (day.dayOfWeek === getDayNum(item.dt)) {
         day.dayTemps.push(Math.floor(item.main.temp_max));
         day.dayTemps.push(Math.floor(item.main.temp_min));
       }

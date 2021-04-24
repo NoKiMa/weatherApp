@@ -13,14 +13,11 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-import {isYouNeedUmbrella, takeUmbrella} from "./services/heavyweightService/umbrellaService";
 
 const App: () => Node = () => {
   const [city, setCity] = useState(DEFAULT_CITY);
   const [weatherData, setWeatherData] = useState<WeatherItem[]>([]);
   const [message, setMessage] = useState('');
-  // const [isRainy, setIsRainy] = useState(false);
-  // const [needUmbrella, setNeedUmbrella] = useState(false);
 
   useEffect(() => {
     restServiceApi.getWeather(city).then(data => {

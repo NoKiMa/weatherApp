@@ -18,7 +18,9 @@ const Weatherboard = (props: WeatherboardProps) => {
   let change:boolean = useMemo(()=>heavyweightThemeChange(isDay), [isDay])
 
   return (
-    <View style={[styles.container_weatherboard, {backgroundColor: change? 'deepskyblue':"midnightblue"}]}>
+    <View style={[styles.container_weatherboard,
+      {backgroundColor: change? 'deepskyblue':"midnightblue"}
+      ]}>
       <View style={styles.name_city_container}>
         <Text style={styles.name_city}>{props.name}</Text>
         <TouchableOpacity onPress={()=>{setIsDay(prev=>!prev)}}>
@@ -29,7 +31,6 @@ const Weatherboard = (props: WeatherboardProps) => {
             <FontAwesome5 name={'moon'} size={20} color="aliceblue" />
           </View>
         </TouchableOpacity>
-
       </View>
       <View style={styles.day_list_container}>
         <DayList weather_data={props.daylist} />
@@ -43,7 +44,7 @@ export default Weatherboard;
 const styles = StyleSheet.create({
   container_weatherboard: {
     height: 220,
-    width: 360,
+    width: "85%",
     backgroundColor: 'deepskyblue',
     marginBottom: 10,
     borderRadius: 5,
