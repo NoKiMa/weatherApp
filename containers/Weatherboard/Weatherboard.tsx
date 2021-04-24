@@ -4,7 +4,7 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import DayList from '../../components/DayList/DayList';
 import {WeatherItem} from '../../models/types';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {heavyweightThemeChange} from "../../services/heavyweightService/umbrellaService";
+import {heavyweightThemeChange} from "../../services/heavyweightService/heavyweightService";
 
 
 type WeatherboardProps = {
