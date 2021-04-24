@@ -65,6 +65,5 @@ const getSeparateDays = (forecast: dayList[]) => {
       arrDayRes.push(dayRes);
     }
   });
-
   return arrDayRes;
 };

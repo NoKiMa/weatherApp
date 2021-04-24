@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
   },
   night_theme_txt:{
     fontSize:9,
-    color:"aliceblue"
+    color:"aliceblue",
+    marginBottom: 3
 
   }
 });

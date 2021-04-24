@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     flex: 8,
     marginHorizontal: 5,
     borderBottomColor: 'deepskyblue',
+    color:"deepskyblue"
   },
   input_btn: {
     // flex:2,
