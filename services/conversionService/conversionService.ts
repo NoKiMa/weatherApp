@@ -2,17 +2,6 @@ import {WeatherItem} from '../../models/types';
 import {dayList, WeatherModel} from '../../models/weather.model';
 import {getDayName, getDayNum} from '../../utils/day.util';
 
-type DayChunk = {
-    dayOfWeek: number;
-    dayTemps: Array<number>;
-};
-
-type DayRes = {
-    dayOfWeek: number;
-    max: number;
-    min: number;
-};
-
 type GroupDays = {
     [key: string]: dayList[];
 }
