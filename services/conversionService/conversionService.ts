@@ -17,7 +17,6 @@ export const creatWeatherData = (data: WeatherModel) => {
         groupDays[date].push(dayList);
     })
 
-
     weatherItems = Object.keys(groupDays).map((dayStamp) => {
         const currentDayData = groupDays[dayStamp];
         const maxTemp: number = currentDayData.reduce((max: number, date: dayList) => Math.max(max, Math.floor(date.main.temp_max)), Math.floor(currentDayData[0].main.temp_max))

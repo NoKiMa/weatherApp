@@ -12,31 +12,35 @@ type WeatherboardProps = {
   daylist: Array<WeatherItem>;
 };
 
-const Weatherboard = (props: WeatherboardProps) => {
+const Weatherboard =  (props: WeatherboardProps) => {
   const [isDay, setIsDay] = useState(false);
 
- // heavyweight function with useMemo() for change night/day theme;
-  let change:boolean = useMemo(()=>heavyweightThemeChange(isDay), [isDay])
+  // heavyweight function with useMemo() for change night/day theme;
+  let change:boolean = useMemo(()=>  heavyweightThemeChange(isDay),[isDay]);
+
+
 
   return (
-    <View style={[styles.container_weatherboard,
-      {backgroundColor: change? 'deepskyblue':"midnightblue"}
+      <View style={[styles.container_weatherboard,
+        {backgroundColor: change ? 'deepskyblue' : "midnightblue"}
       ]}>
-      <View style={styles.name_city_container}>
-        <Text style={styles.name_city}>{props.name}</Text>
-        <TouchableOpacity onPress={()=>{setIsDay(prev=>!prev)}}>
-          <View style={styles.night_theme_container}>
-            <Text style={styles.night_theme_txt}>
-              night theme
-            </Text>
-            <FontAwesome5 name={'moon'} size={20} color="aliceblue" />
-          </View>
-        </TouchableOpacity>
+        <View style={styles.name_city_container}>
+          <Text style={styles.name_city}>{props.name}</Text>
+          <TouchableOpacity onPress={() => {
+            setIsDay(prev => !prev)
+          }}>
+            <View style={styles.night_theme_container}>
+              <Text style={styles.night_theme_txt}>
+                night theme
+              </Text>
+              <FontAwesome5 name={'moon'} size={20} color="aliceblue"/>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.day_list_container}>
+          <DayList weather_data={props.daylist}/>
+        </View>
       </View>
-      <View style={styles.day_list_container}>
-        <DayList weather_data={props.daylist} />
-      </View>
-    </View>
   );
 };
 
