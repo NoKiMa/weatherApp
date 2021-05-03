@@ -3,67 +3,49 @@ import {dayList, WeatherModel} from '../../models/weather.model';
 import {getDayName, getDayNum} from '../../utils/day.util';
 
 type DayChunk = {
-  dayOfWeek: number;
-  dayTemps: Array<number>;
+    dayOfWeek: number;
+    dayTemps: Array<number>;
 };
 
 type DayRes = {
-  dayOfWeek: number;
-  max: number;
-  min: number;
+    dayOfWeek: number;
+    max: number;
+    min: number;
 };
+
+type GroupDays = {
+    [key: string]: dayList[];
+}
 
 export const creatWeatherData = (data: WeatherModel) => {
-  return data.list
-    .filter((day: dayList, index: number) => index % 8 === 0)
-    .map(day => {
-      const separateDays = getSeparateDays(data.list);
-      const dayOfWeek = separateDays.find(
-        separateDay => separateDay.dayOfWeek === getDayNum(day.dt_txt),
-      );
-      const weatherItem: WeatherItem = {
-        id: day.dt.toString(),
-        max_temp: dayOfWeek.max,
-        min_temp: dayOfWeek.min,
-        day: getDayName(day),
-        icon: day.weather[0].icon,
-      };
-      return weatherItem;
+    let weatherItems: WeatherItem [] = [];
+    let groupDays: GroupDays = {} as GroupDays;
+    data.list.forEach((dayList: dayList) => {
+        const date: string = dayList.dt_txt.split(' ')[0];
+        if (!groupDays[date]) {
+            groupDays[date] = [];
+        }
+        groupDays[date].push(dayList);
+    })
+
+
+    weatherItems = Object.keys(groupDays).map((dayStamp) => {
+        const currentDayData = groupDays[dayStamp];
+        const maxTemp: number = currentDayData.reduce((max: number, date: dayList) => Math.max(max, Math.floor(date.main.temp_max)), Math.floor(currentDayData[0].main.temp_max))
+        const minTemp: number = currentDayData.reduce((min: number, date: dayList) => Math.min(min, Math.floor(date.main.temp_min)), Math.floor(currentDayData[0].main.temp_max))
+        return {
+            id: currentDayData[0].dt.toString(),
+            max_temp: maxTemp,
+            min_temp: minTemp,
+            day: getDayName(currentDayData[0]),
+            icon: getWeatherIcon(currentDayData)
+        };
     });
-};
+    weatherItems.length = 5;
+    return weatherItems;
+}
 
-const getSeparateDays = (forecast: dayList[]) => {
-  let arrDays: Array<DayChunk> = [];
-  let arrDayRes: DayRes[] = [];
-  for (let i = 0; i < 7; i++) {
-    let dayChunk: DayChunk = {
-      dayOfWeek: i,
-      dayTemps: [],
-    };
-    arrDays.push(dayChunk);
-  }
-
-  forecast.forEach(item => {
-    arrDays.forEach(day => {
-      if (day.dayOfWeek === getDayNum(item.dt_txt)) {
-        day.dayTemps.push(Math.floor(item.main.temp_max));
-        day.dayTemps.push(Math.floor(item.main.temp_min));
-      }
-    });
-  });
-
-  arrDays.forEach(day => {
-    let max_temp: number = Math.max.apply(Math, day.dayTemps);
-    let min_temp: number = Math.min.apply(Math, day.dayTemps);
-
-    if (max_temp !== Infinity && min_temp !== Infinity) {
-      let dayRes: DayRes = {
-        dayOfWeek: day.dayOfWeek,
-        max: max_temp,
-        min: min_temp,
-      };
-      arrDayRes.push(dayRes);
-    }
-  });
-  return arrDayRes;
-};
+const getWeatherIcon = (dayWeather: dayList[]) => {
+    let today: number = new Date(dayWeather[0].dt_txt.split(" ")[0]).getDay();
+    return today === new Date().getDay() ? dayWeather[0].weather[0].icon : dayWeather[Math.ceil(dayWeather.length / 2)].weather[0].icon;
+}
