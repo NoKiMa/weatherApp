@@ -6,3 +6,4 @@ export const heavyweightThemeChange = (isDay:boolean) => {
     console.log("heavyweightThemeChange");
     return !isDay;
 }
+
